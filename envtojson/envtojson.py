@@ -53,15 +53,18 @@ class Envtojson:
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Write shell environment variables to a file in JSON.'
+        description='Write shell environment variables to a file in JSON.',
+        epilog="Example: kmscrypto <kms_cmk_id> *.rsa"
     )
-    parser.add_argument('filename', type=str, help='file to write to')
+    parser.add_argument('filename', type=str,
+                        help='file(s) to encrypt (accepts globs)')
     parser.add_argument('vars', nargs='+', type=str)
     parser.add_argument('-q', '--quiet', action='store_true')
     args = parser.parse_args()
 
     envtojson = Envtojson(args.filename, args.vars, args.quiet)
     envtojson.run()
+
 
 if __name__ == '__main__':
     main()
